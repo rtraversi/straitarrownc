@@ -50,9 +50,9 @@
     background: rgba(255,255,255,0.97);
     box-shadow: 0 1px 0 rgba(0,0,0,0.08);
   }
-  /* Logo: white on hero, dark once scrolled */
+  /* Logo: naturally dark. On hero (before scroll) we invert to white. Footer stays white. */
   .nav-logo { height: 44px; filter: brightness(0) invert(1); transition: filter 0.3s; }
-  nav.scrolled .nav-logo { filter: brightness(0); }
+  nav.scrolled .nav-logo { filter: none; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     text-decoration: none; color: rgba(255,255,255,0.9);
