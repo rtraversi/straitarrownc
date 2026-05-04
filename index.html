@@ -130,7 +130,7 @@
     min-height: 100vh;
     position: relative; overflow: hidden;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 120px 48px 160px;
+    padding: 140px 48px 100px;
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -166,7 +166,7 @@
     max-width: 520px; line-height: 1.7; margin-bottom: 48px;
   }
   .hero-sub strong { color: var(--white); font-weight: 500; }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 56px; }
   .btn-primary {
     background: var(--gold); color: var(--white);
     font-family: 'Barlow Condensed', sans-serif;
@@ -188,8 +188,9 @@
   }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
   .hero-badges {
-    position: absolute; bottom: 48px; left: 48px;
-    display: flex; gap: 40px; z-index: 1;
+    display: flex; gap: 40px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.12);
   }
   .badge { text-align: center; }
   .badge-num {
@@ -394,7 +395,7 @@
     .hamburger { display: flex; }
     .mobile-drawer { display: flex; }
     section { padding: 72px 24px; }
-    .hero { padding: 100px 24px 120px; }
+    .hero { padding: 120px 24px 80px; }
     #about, #area, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .ba-grid { grid-template-columns: 1fr; }
@@ -412,7 +413,7 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <img src="StraitArrow.png" alt="Strait Arrow" class="nav-logo">
+  <img src="straitarrow.png" alt="Strait Arrow" class="nav-logo">
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
@@ -781,7 +782,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="StraitArrow.png" alt="Strait Arrow" class="footer-logo">
+  <img src="straitarrow.png" alt="Strait Arrow" class="footer-logo">
   <div class="footer-info">
     © 2025 Strait Arrow General Contracting · Katy Traversi, Licensed GC · Wake County, NC<br>
     NC GC License #L.103917 · straitarrownc.com
