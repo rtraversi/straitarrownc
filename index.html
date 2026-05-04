@@ -50,15 +50,14 @@
     background: rgba(255,255,255,0.97);
     box-shadow: 0 1px 0 rgba(0,0,0,0.08);
   }
-  /* Logo: circular badge - transparent bg, works on both dark and light */
-  .nav-logo { height: 48px; filter: none; transition: filter 0.3s; }
+  /* Logo: circular badge - fully transparent, no background */
+  .nav-logo { height: 70px; filter: none; transition: filter 0.3s; }
   .nav-logo-wrap {
     background: transparent;
-    padding: 4px 0;
+    padding: 0;
     display: flex; align-items: center;
-    transition: background 0.3s;
   }
-  nav.scrolled .nav-logo-wrap { background: transparent; padding: 4px 0; }
+  nav.scrolled .nav-logo-wrap { background: transparent; padding: 0; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     text-decoration: none; color: rgba(255,255,255,0.9);
@@ -377,7 +376,7 @@
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 24px; border-top: 3px solid var(--gold);
   }
-  .footer-logo { height: 52px; filter: none; }
+  .footer-logo { height: 70px; filter: none; }
   .footer-info { font-size: 13px; color: #555; line-height: 1.8; text-align: center; }
   .footer-links { display: flex; gap: 24px; }
   .footer-links a {
