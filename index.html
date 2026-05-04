@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strait Arrow | General Contracting | Wake County, NC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #111111;
+    --dark: #1a1a1a;
+    --charcoal: #2b2b2b;
+    --mid: #444;
+    --light-gray: #e8e4df;
+    --off-white: #f4f1ec;
+    --white: #ffffff;
+    --gold: #c8922a;
+    --gold-light: #e6ae4a;
+    --rust: #a85c2a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: linear-gradient(to bottom, rgba(17,17,17,0.98) 0%, rgba(17,17,17,0) 100%);
+    transition: background 0.3s;
+  }
+  nav.scrolled { background: rgba(17,17,17,0.97); border-bottom: 1px solid rgba(200,146,42,0.2); }
+  .nav-logo { height: 44px; filter: brightness(1); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--light-gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px 22px; border: none; cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    width: 40px; height: 40px; cursor: pointer; gap: 6px;
+    background: none; border: none; padding: 0;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--off-white);
+    transition: transform 0.3s, opacity 0.3s, width 0.3s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.98);
+    z-index: 150;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-drawer.open {
+    opacity: 1; pointer-events: all;
+  }
+  .mobile-drawer a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 3px;
+    color: var(--off-white); text-decoration: none;
+    padding: 12px 0;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    width: 260px; text-align: center;
+  }
+  .mobile-drawer a:hover { color: var(--gold); }
+  .mobile-drawer a.drawer-cta {
+    margin-top: 32px;
+    background: var(--gold); color: var(--black);
+    font-size: 20px; letter-spacing: 3px;
+    padding: 18px 48px;
+    border-bottom: none; width: auto;
+  }
+  .mobile-drawer a.drawer-cta:hover { background: var(--gold-light); color: var(--black); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 40%, #111 100%);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 45%;
+    background: linear-gradient(135deg, transparent 0%, rgba(200,146,42,0.06) 100%);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .hero-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; color: #999;
+    max-width: 520px; line-height: 1.7; margin-bottom: 48px;
+  }
+  .hero-sub strong { color: var(--light-gray); font-weight: 500; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+    padding: 16px 36px; border: none; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--light-gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    padding: 15px 36px; border: 1px solid rgba(232,228,223,0.3); cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-badges {
+    position: absolute; bottom: 48px; left: 48px;
+    display: flex; gap: 32px;
+  }
+  .badge {
+    text-align: center;
+  }
+  .badge-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px; color: var(--gold); line-height: 1;
+  }
+  .badge-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #666;
+    margin-top: 4px;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1; color: var(--white); letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .section-title span { color: var(--gold); }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--dark);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-text p { font-size: 16px; line-height: 1.8; color: #aaa; margin-bottom: 20px; }
+  .about-text p strong { color: var(--off-white); font-weight: 500; }
+  .about-credentials {
+    margin-top: 40px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .credential {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px;
+    border-left: 3px solid var(--gold);
+    background: rgba(200,146,42,0.06);
+  }
+  .credential-icon { font-size: 20px; }
+  .credential-text { font-size: 14px; color: var(--light-gray); line-height: 1.4; }
+  .credential-text strong { display: block; font-weight: 600; color: var(--white); }
+  .about-image-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .about-img-placeholder {
+    background: var(--charcoal);
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    color: #444; font-size: 32px;
+    position: relative; overflow: hidden;
+  }
+  .about-img-placeholder:first-child {
+    grid-column: 1 / -1; aspect-ratio: 16/7;
+  }
+  .about-img-placeholder::after {
+    content: attr(data-label);
+    position: absolute; bottom: 12px; left: 12px;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: #555; font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--black); }
+  .services-intro { max-width: 600px; margin-bottom: 64px; }
+  .services-intro p { font-size: 16px; color: #888; line-height: 1.7; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .service-card {
+    background: var(--dark);
+    padding: 40px 32px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: #222; }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { font-size: 36px; margin-bottom: 20px; }
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--white);
+    margin-bottom: 12px;
+  }
+  .service-desc { font-size: 14px; color: #777; line-height: 1.7; }
+  .service-tag {
+    display: inline-block; margin-top: 16px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+  }
+  .service-card.featured { background: #1e1a14; }
+  .service-card.featured .service-card::before { transform: scaleX(1); }
+
+  /* ── BEFORE/AFTER ── */
+  #work {
+    background: var(--dark);
+  }
+  .work-header { margin-bottom: 48px; }
+  .ba-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .ba-card {
+    background: var(--charcoal);
+    overflow: hidden;
+    position: relative;
+  }
+  .ba-images {
+    display: grid; grid-template-columns: 1fr 1fr;
+    height: 280px;
+  }
+  .ba-side {
+    background: #1f1f1f;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden;
+  }
+  .ba-side.before { background: #181818; }
+  .ba-side.after { background: #1e1a14; }
+  .ba-photo-placeholder {
+    font-size: 48px; color: #333;
+  }
+  .ba-label-overlay {
+    position: absolute; bottom: 12px; left: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ba-side.before .ba-label-overlay { color: #555; }
+  .ba-side.after .ba-label-overlay { color: var(--gold); }
+  .ba-divider {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+    background: var(--gold); z-index: 2;
+  }
+  .ba-info {
+    padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .ba-project-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--white);
+  }
+  .ba-project-loc { font-size: 13px; color: #666; margin-top: 4px; }
+  .ba-category {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+  }
+  .work-note {
+    margin-top: 32px; text-align: center;
+    font-size: 14px; color: #555; font-style: italic;
+  }
+  .work-note a { color: var(--gold); text-decoration: none; }
+  .work-note a:hover { text-decoration: underline; }
+
+  /* ── SERVICE AREA ── */
+  #area {
+    background: var(--black);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .area-text p { font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 20px; }
+  .area-text p strong { color: var(--light-gray); font-weight: 500; }
+  .area-counties {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px;
+  }
+  .county-tag {
+    background: var(--charcoal); color: var(--light-gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 8px 16px; font-weight: 600;
+  }
+  .county-tag.primary { background: rgba(200,146,42,0.15); color: var(--gold); border: 1px solid rgba(200,146,42,0.3); }
+  .map-placeholder {
+    background: var(--charcoal);
+    height: 440px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; color: #444;
+    position: relative; overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 55% 45%, rgba(200,146,42,0.08) 0%, transparent 60%);
+  }
+  .map-icon { font-size: 64px; }
+  .map-caption { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #555; font-family: 'Barlow Condensed', sans-serif; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--dark); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  }
+  .contact-info { }
+  .contact-info p { font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 40px; }
+  .contact-methods { display: flex; flex-direction: column; gap: 20px; }
+  .contact-method {
+    display: flex; align-items: center; gap: 18px;
+    padding: 20px 24px;
+    background: var(--charcoal);
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s;
+    text-decoration: none;
+  }
+  .contact-method:hover { border-left-color: var(--gold); }
+  .cm-icon { font-size: 22px; color: var(--gold); }
+  .cm-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #555; font-family: 'Barlow Condensed', sans-serif; }
+  .cm-value { font-size: 15px; color: var(--off-white); font-weight: 500; margin-top: 2px; }
+  .contact-form { }
+  .form-row { margin-bottom: 16px; }
+  .form-row label {
+    display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: #555; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 8px;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; background: var(--charcoal);
+    border: 1px solid #333; color: var(--off-white);
+    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 300;
+    padding: 14px 18px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-row textarea { resize: vertical; min-height: 120px; }
+  .form-row select option { background: var(--charcoal); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a;
+    padding: 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+    border-top: 1px solid rgba(200,146,42,0.15);
+  }
+  .footer-logo { height: 36px; }
+  .footer-info { font-size: 13px; color: #444; line-height: 1.8; text-align: center; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: #444; text-decoration: none; font-family: 'Barlow Condensed', sans-serif;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    height: 2px; background: linear-gradient(to right, var(--gold), transparent);
+    margin: 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag, .hero h1, .hero-sub, .hero-actions, .hero-badges {
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.35s; }
+  .hero-actions { animation-delay: 0.5s; }
+  .hero-badges { animation-delay: 0.65s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-drawer { display: flex; }
+    section { padding: 72px 24px; }
+    .hero { padding: 100px 24px 80px; }
+    #about, #area, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .ba-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    .hero-badges { position: relative; bottom: auto; left: auto; margin-top: 40px; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <img src="StraitArrow.png" alt="Strait Arrow" class="nav-logo">
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Free Estimate</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <a href="#about" class="drawer-link">About</a>
+  <a href="#services" class="drawer-link">Services</a>
+  <a href="#work" class="drawer-link">Our Work</a>
+  <a href="#area" class="drawer-link">Service Area</a>
+  <a href="#contact" class="drawer-link">Contact</a>
+  <a href="#contact" class="drawer-cta">Free Estimate</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">Wake County, NC &amp; Surrounding Areas</div>
+  <h1>Built<br>Right.<br><span>Done Strait.</span></h1>
+  <p class="hero-sub">
+    <strong>Licensed general contracting</strong> for homeowners who expect more — from kitchen &amp; bath renovations to full-scope projects managed with the precision of a legal mind.
+  </p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request a Free Estimate</a>
+    <a href="#work" class="btn-outline">View Our Work</a>
+  </div>
+  <div class="hero-badges">
+    <div class="badge">
+      <div class="badge-num">NC</div>
+      <div class="badge-label">Licensed GC</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">3</div>
+      <div class="badge-label">Specialties</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">WNC</div>
+      <div class="badge-label">Wake &amp; Beyond</div>
+    </div>
+  </div>
+</section>
+<div class="gold-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">The Strait<br><span>Difference</span></h2>
+    <p>Strait Arrow was built on one simple promise: do the job right, every time. We're a Wake County–based general contracting firm specializing in residential renovations — the kind of work that transforms how you live in your home.</p>
+    <p>What sets us apart? <strong>Katy Traversi</strong> brings a rare combination to the table: NC Licensed General Contractor, licensed real estate broker, and practicing attorney. That means every project is managed with the accountability and attention to detail your investment deserves.</p>
+    <p>We're not just builders — we're advocates for our clients from the first call to the final walkthrough.</p>
+    <div class="about-credentials">
+      <div class="credential">
+        <span class="credential-icon">🏗️</span>
+        <div class="credential-text">
+          <strong>NC Licensed General Contractor</strong>
+          License on file — ask us for your verification
+        </div>
+      </div>
+      <div class="credential">
+        <span class="credential-icon">⚖️</span>
+        <div class="credential-text">
+          <strong>Licensed Attorney</strong>
+          Contracts reviewed with legal precision, protecting you
+        </div>
+      </div>
+      <div class="credential">
+        <span class="credential-icon">🏠</span>
+        <div class="credential-text">
+          <strong>Licensed Real Estate Broker</strong>
+          Understanding how renovations impact your home's value
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="about-image-grid">
+      <div class="about-img-placeholder" data-label="Strait Arrow Team"></div>
+      <div class="about-img-placeholder" data-label="Kitchen Reno"></div>
+      <div class="about-img-placeholder" data-label="Bath Reno"></div>
+    </div>
+  </div>
+</section>
+<div class="gold-divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Full-Scope<br><span>Capabilities</span></h2>
+    <p>From concept to completion, Strait Arrow manages your entire project — self-performing the core work and coordinating our trusted network of licensed subcontractors for specialty trades. One point of contact. No surprises.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card featured">
+      <div class="service-icon">🍳</div>
+      <div class="service-name">Kitchen Renovations</div>
+      <div class="service-desc">Full kitchen remodels including custom cabinetry, countertops, tile backsplash, layout reconfiguration, and finish work. We transform kitchens into the heart of your home.</div>
+      <span class="service-tag">★ Core Specialty</span>
+    </div>
+    <div class="service-card featured">
+      <div class="service-icon">🛁</div>
+      <div class="service-name">Bathroom Renovations</div>
+      <div class="service-desc">Master baths, guest baths, and powder rooms — tile work, vanities, walk-in showers, soaking tubs, and everything in between. Built to last and built to impress.</div>
+      <span class="service-tag">★ Core Specialty</span>
+    </div>
+    <div class="service-card featured">
+      <div class="service-icon">🪵</div>
+      <div class="service-name">Flooring</div>
+      <div class="service-desc">Hardwood, luxury vinyl plank, tile, laminate — installation, refinishing, and replacement throughout your home. Precision cuts, expert transitions, flawless results.</div>
+      <span class="service-tag">★ Core Specialty</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <div class="service-name">Roofing</div>
+      <div class="service-desc">Roof replacements, repairs, and inspections coordinated through our vetted roofing partners — licensed, insured, and held to Strait Arrow's standards.</div>
+      <span class="service-tag">Coordinated Trade</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">❄️</div>
+      <div class="service-name">HVAC</div>
+      <div class="service-desc">System installations, replacements, and repairs through licensed HVAC subcontractors. Comfort and code compliance, managed under one contract.</div>
+      <span class="service-tag">Coordinated Trade</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-name">Plumbing &amp; Electrical</div>
+      <div class="service-desc">Licensed plumbers and electricians integrated into your project scope. From panel upgrades to full rough-in work, we coordinate the trades so you don't have to.</div>
+      <span class="service-tag">Coordinated Trade</span>
+    </div>
+  </div>
+</section>
+<div class="gold-divider"></div>
+
+<!-- BEFORE / AFTER -->
+<section id="work">
+  <div class="work-header">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Before &amp; <span>After</span></h2>
+  </div>
+  <div class="ba-grid">
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side before">
+          <div class="ba-photo-placeholder">📷</div>
+          <span class="ba-label-overlay">Before</span>
+        </div>
+        <div class="ba-side after">
+          <div class="ba-photo-placeholder">✨</div>
+          <span class="ba-label-overlay">After</span>
+        </div>
+        <div class="ba-divider"></div>
+      </div>
+      <div class="ba-info">
+        <div>
+          <div class="ba-project-name">Kitchen Transformation</div>
+          <div class="ba-project-loc">Raleigh, NC</div>
+        </div>
+        <div class="ba-category">Kitchen</div>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side before">
+          <div class="ba-photo-placeholder">📷</div>
+          <span class="ba-label-overlay">Before</span>
+        </div>
+        <div class="ba-side after">
+          <div class="ba-photo-placeholder">✨</div>
+          <span class="ba-label-overlay">After</span>
+        </div>
+        <div class="ba-divider"></div>
+      </div>
+      <div class="ba-info">
+        <div>
+          <div class="ba-project-name">Master Bath Remodel</div>
+          <div class="ba-project-loc">Cary, NC</div>
+        </div>
+        <div class="ba-category">Bathroom</div>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side before">
+          <div class="ba-photo-placeholder">📷</div>
+          <span class="ba-label-overlay">Before</span>
+        </div>
+        <div class="ba-side after">
+          <div class="ba-photo-placeholder">✨</div>
+          <span class="ba-label-overlay">After</span>
+        </div>
+        <div class="ba-divider"></div>
+      </div>
+      <div class="ba-info">
+        <div>
+          <div class="ba-project-name">Hardwood Flooring</div>
+          <div class="ba-project-loc">Apex, NC</div>
+        </div>
+        <div class="ba-category">Flooring</div>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side before">
+          <div class="ba-photo-placeholder">📷</div>
+          <span class="ba-label-overlay">Before</span>
+        </div>
+        <div class="ba-side after">
+          <div class="ba-photo-placeholder">✨</div>
+          <span class="ba-label-overlay">After</span>
+        </div>
+        <div class="ba-divider"></div>
+      </div>
+      <div class="ba-info">
+        <div>
+          <div class="ba-project-name">Full Bath Renovation</div>
+          <div class="ba-project-loc">Wake Forest, NC</div>
+        </div>
+        <div class="ba-category">Bathroom</div>
+      </div>
+    </div>
+  </div>
+  <p class="work-note">
+    More photos available on our <a href="https://www.facebook.com/straitarrownc" target="_blank">Facebook page →</a>
+    &nbsp;|&nbsp; <em>Photo placeholders above will be replaced with your actual project photos.</em>
+  </p>
+</section>
+<div class="gold-divider"></div>
+
+<!-- SERVICE AREA -->
+<section id="area">
+  <div class="area-text">
+    <div class="section-label">Where We Work</div>
+    <h2 class="section-title">Wake County<br><span>&amp; Beyond</span></h2>
+    <p>Strait Arrow is proudly based in Wake County and serves the greater Triangle area. <strong>Our primary service area</strong> includes Raleigh, Cary, Apex, Wake Forest, Garner, Clayton, Fuquay-Varina, and surrounding communities.</p>
+    <p>Have a larger or more complex project outside Wake County? <strong>We travel.</strong> Reach out and let's talk about your project — we evaluate each job individually and are happy to discuss scope and travel.</p>
+    <div class="area-counties">
+      <span class="county-tag primary">Wake County ★</span>
+      <span class="county-tag">Raleigh</span>
+      <span class="county-tag">Cary</span>
+      <span class="county-tag">Apex</span>
+      <span class="county-tag">Wake Forest</span>
+      <span class="county-tag">Garner</span>
+      <span class="county-tag">Fuquay-Varina</span>
+      <span class="county-tag">Clayton</span>
+      <span class="county-tag">Durham</span>
+      <span class="county-tag">Johnston Co.</span>
+      <span class="county-tag">Chatham Co.</span>
+      <span class="county-tag">+ More</span>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; justify-content:center; gap:24px;">
+    <div style="background:var(--charcoal); padding:40px 32px; border-left:3px solid var(--gold);">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px;">Primary Service Area</div>
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--white); margin-bottom:12px;">Wake County, NC</div>
+      <div style="font-size:14px; color:#777; line-height:1.8;">Raleigh · Cary · Apex · Wake Forest<br>Garner · Fuquay-Varina · Clayton<br>Holly Springs · Morrisville · Knightdale</div>
+    </div>
+    <div style="background:var(--charcoal); padding:32px; border-left:3px solid #333;">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#555; margin-bottom:12px;">Extended Coverage</div>
+      <div style="font-size:14px; color:#666; line-height:1.8;">Durham · Chatham Co. · Johnston Co.<br>Franklin Co. · Harnett Co. · and beyond</div>
+      <div style="margin-top:16px; font-size:13px; color:var(--gold); font-style:italic;">Have a project outside this area? Ask us — we'll travel for the right job.</div>
+    </div>
+    <a href="#contact" class="btn-primary" style="text-align:center;">Check Your Area →</a>
+  </div>
+</section>
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Start Your<br><span>Project</span></h2>
+  <div class="contact-grid" style="margin-top:48px;">
+    <div class="contact-info">
+      <p>Ready to transform your home? We offer <strong>free estimates</strong> on all projects. Reach out and a member of our team will be in touch within one business day.</p>
+      <div class="contact-methods">
+        <a href="tel:+1XXXXXXXXXX" class="contact-method">
+          <span class="cm-icon">📞</span>
+          <div>
+            <div class="cm-label">Call or Text</div>
+            <div class="cm-value">(XXX) XXX-XXXX</div>
+          </div>
+        </a>
+        <a href="mailto:info@straitarrownc.com" class="contact-method">
+          <span class="cm-icon">✉️</span>
+          <div>
+            <div class="cm-label">Email</div>
+            <div class="cm-value">info@straitarrownc.com</div>
+          </div>
+        </a>
+        <a href="https://www.facebook.com/straitarrownc" target="_blank" class="contact-method">
+          <span class="cm-icon">👍</span>
+          <div>
+            <div class="cm-label">Facebook</div>
+            <div class="cm-value">facebook.com/straitarrownc</div>
+          </div>
+        </a>
+        <div class="contact-method" style="cursor:default;">
+          <span class="cm-icon">📍</span>
+          <div>
+            <div class="cm-label">Service Area</div>
+            <div class="cm-value">Wake County, NC &amp; Surrounding Areas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <!-- Netlify Forms: add data-netlify="true" and name attr. Netlify detects this at deploy time. -->
+      <form name="estimate-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+        <input type="hidden" name="form-name" value="estimate-request">
+        <!-- Honeypot field — hidden from humans, traps bots -->
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="first-name" placeholder="Jane" required>
+          </div>
+          <div class="form-row">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="last-name" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+        </div>
+        <div class="form-row">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(919) 555-0100">
+        </div>
+        <div class="form-row">
+          <label for="project-type">Project Type</label>
+          <select id="project-type" name="project-type" required>
+            <option value="">— Select a service —</option>
+            <option>Kitchen Renovation</option>
+            <option>Bathroom Renovation</option>
+            <option>Flooring</option>
+            <option>Roofing</option>
+            <option>HVAC</option>
+            <option>Plumbing / Electrical</option>
+            <option>Multiple / Full Renovation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="message">Tell Us About Your Project</label>
+          <textarea id="message" name="message" placeholder="Describe the scope of work, your timeline, and any other details that would help us prepare your estimate..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center;">
+          Request Free Estimate →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="StraitArrow.png" alt="Strait Arrow" class="footer-logo">
+  <div class="footer-info">
+    © 2025 Strait Arrow General Contracting · Katy Traversi, Licensed GC · Wake County, NC<br>
+    NC GC License #XXXXXXXX · straitarrownc.com
+  </div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="https://www.facebook.com/straitarrownc" target="_blank">Facebook</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('mobile-drawer');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close drawer when any drawer link is clicked
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>
