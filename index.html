@@ -50,7 +50,7 @@
     background: rgba(255,255,255,0.97);
     box-shadow: 0 1px 0 rgba(0,0,0,0.08);
   }
-  /* Logo: naturally dark. On hero (before scroll) we invert to white. Footer stays white. */
+  /* Logo: inverted white on dark hero, natural black once scrolled */
   .nav-logo { height: 44px; filter: brightness(0) invert(1); transition: filter 0.3s; }
   nav.scrolled .nav-logo { filter: none; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -132,9 +132,14 @@
     display: flex; flex-direction: column; justify-content: center;
     padding: 140px 48px 100px;
   }
+  /* Hero background photo + dark overlay */
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('raleigh.jpg') center center / cover no-repeat;
+    background-color: #1a2535;
+    background-image: url('raleigh.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
     z-index: 0;
   }
   .hero-bg::after {
